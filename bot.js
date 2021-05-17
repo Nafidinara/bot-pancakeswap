@@ -21,10 +21,13 @@ const data = {
 
   gasPrice : '5', //in gwei
   
-  gasLimit : '345684' //at least 21000
+  gasLimit : '345684', //at least 21000
+
+  maxBnb : 2 //liquidity yg di add
 }
 
 let initialLiquidityDetected = false;
+let jmlBnb = 0;
 
 const bscMainnetUrl = 'https://bsc-dataseed1.defibit.io/' //https://bsc-dataseed1.defibit.io/ https://bsc-dataseed.binance.org/
 const mnemonic = 'purity dumb wild episode crazy learn icon exhibit title story enlist board';
@@ -48,6 +51,12 @@ const router = new ethers.Contract(
   account
 );
 
+const erc = new ethers.Contract(
+  data.WBNB,
+  [{"constant": true,"inputs": [{"name": "_owner","type": "address"}],"name": "balanceOf","outputs": [{"name": "balance","type": "uint256"}],"payable": false,"type": "function"}],
+  account
+);  
+
 const run = async () => {
   const tokenIn = data.WBNB;
   const tokenOut = data.to_PURCHASE;
@@ -55,15 +64,21 @@ const run = async () => {
 
   console.log(chalk.blue(`pairAddress: ${pairAddress}`));
   if (pairAddress !== null && pairAddress !== undefined) {
-    console.log("pairAddress.toString().indexOf('0x0000000000000')", pairAddress.toString().indexOf('0x0000000000000'));
+    // console.log("pairAddress.toString().indexOf('0x0000000000000')", pairAddress.toString().indexOf('0x0000000000000'));
     if (pairAddress.toString().indexOf('0x0000000000000') > -1) {
       console.log(chalk.red(`pairAddress ${pairAddress} not detected. Restart me!`));
       return;
     }
   }
 
-  const pair = new ethers.Contract(pairAddress, ['event Mint(address indexed sender, uint amount0, uint amount1)'], account);
-  // console.log(pair);
+  // const pair = new ethers.Contract(pairAddress, ['event Mint(address indexed sender, uint amount0, uint amount1)'], account);
+  const pairBNBvalue = await erc.balanceOf(pairAddress); 
+  jmlBnb = ethers.utils.formatEther(pairBNBvalue);
+  console.log(`value bnb nya : ${jmlBnb}`);
+  // return;
+
+  buyAction();
+  }
 
   let buyAction = async() => {
     if(initialLiquidityDetected === true) {
@@ -71,18 +86,16 @@ const run = async () => {
         return;
     }
 
+    if(jmlBnb > data.maxBnb){
     console.log('beli');
     initialLiquidityDetected = true;
-  
+      return 'ok beli';
    //We buy x amount of the new token for our wbnb
    const amountIn = ethers.utils.parseUnits(`${data.AMOUNT_OF_WBNB}`, 'ether');
    const amounts = await router.getAmountsOut(amountIn, [tokenIn, tokenOut]);
   
    //Our execution price will be a bit different, we need some flexbility
    const amountOutMin = amounts[1].sub(amounts[1].div(`${data.Slippage}`)); 
-
-   console.log(`slipage segini amount 1 : ${amounts[1]}`);
-   console.log(`slipage segini : ${amountOutMin}`);return;
 
    console.log(
     chalk.green.inverse(`Liquidity Addition Detected\n`)
@@ -116,14 +129,11 @@ const run = async () => {
    const receipt = await tx.wait(); 
    console.log('Transaction receipt');
    console.log(receipt);
+  }else{
+    initialLiquidityDetected = false;
+    console.log(' run agaiin...');
+    run();
   }
-
-  setInterval(() => {
-    console.log('cekcekcek');
-    // pair.on('Mint', async (sender, amount0, amount1) => {
-      buyAction();
-    // });
-  }, 1000);
   }
 
 run();
