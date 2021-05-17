@@ -7,7 +7,7 @@ const app = express();
 const data = {
   WBNB: '0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c', //wbnb 
 
-  to_PURCHASE: '0xe9e7cea3dedca5984780bafc599bd69add087d56',  // token to purchase = BUSD for test 0xe9e7cea3dedca5984780bafc599bd69add087d56
+  to_PURCHASE: '0x02fe5cf0390a50b030f56a5f4be4999c00b82fc8',  // token to purchase = BUSD for test 0xe9e7cea3dedca5984780bafc599bd69add087d56
 
   factory: '0xcA143Ce32Fe78f1f7019d7d551a6402fC5350c73',  //PancakeSwap V2 factory
 
@@ -67,7 +67,7 @@ const run = async () => {
     // console.log("pairAddress.toString().indexOf('0x0000000000000')", pairAddress.toString().indexOf('0x0000000000000'));
     if (pairAddress.toString().indexOf('0x0000000000000') > -1) {
       console.log(chalk.red(`pairAddress ${pairAddress} not detected. Restart me!`));
-      return;
+      await run();
     }
   }
 
@@ -77,13 +77,13 @@ const run = async () => {
   console.log(`value bnb nya : ${jmlBnb}`);
   // return;
 
-  buyAction();
+  await buyAction();
   }
 
   let buyAction = async() => {
     if(initialLiquidityDetected === true) {
       console.log('tidak beli');
-        return;
+        return null;
     }
 
     if(jmlBnb > data.maxBnb){
