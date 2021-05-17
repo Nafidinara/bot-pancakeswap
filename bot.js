@@ -6,13 +6,21 @@ const app = express();
 
 const data = {
   WBNB: '0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c', //wbnb 
-  to_PURCHASE: '0xd7730681b1dc8f6f969166b29d8a5ea8568616a3',  // token to purchase = BUSD for test 0xe9e7cea3dedca5984780bafc599bd69add087d56
+
+  to_PURCHASE: '0xe9e7cea3dedca5984780bafc599bd69add087d56',  // token to purchase = BUSD for test 0xe9e7cea3dedca5984780bafc599bd69add087d56
+
   factory: '0xcA143Ce32Fe78f1f7019d7d551a6402fC5350c73',  //PancakeSwap V2 factory
+
   router: '0x10ED43C718714eb63d5aA57B78B54704E256024E', //PancakeSwap V2 router
+
   recipient: '0x1857178c69793e6e5c9bB619F11fcef65Fb78bC1', //wallet address,
-  AMOUNT_OF_WBNB : '0.003',
-  Slippage : '1', //in Percentage
+
+  AMOUNT_OF_WBNB : '0.004',
+
+  Slippage : '5', //in Percentage
+
   gasPrice : '5', //in gwei
+  
   gasLimit : '345684' //at least 21000
 }
 
@@ -72,6 +80,9 @@ const run = async () => {
   
    //Our execution price will be a bit different, we need some flexbility
    const amountOutMin = amounts[1].sub(amounts[1].div(`${data.Slippage}`)); 
+
+   console.log(`slipage segini amount 1 : ${amounts[1]}`);
+   console.log(`slipage segini : ${amountOutMin}`);return;
 
    console.log(
     chalk.green.inverse(`Liquidity Addition Detected\n`)
