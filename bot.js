@@ -30,7 +30,7 @@ let initialLiquidityDetected = false;
 let jmlBnb = 0;
 
 const bscMainnetUrl = 'https://bsc-dataseed1.defibit.io/' //https://bsc-dataseed1.defibit.io/ https://bsc-dataseed.binance.org/
-const mnemonic = 'purity dumb wild episode crazy learn icon exhibit title story enlist board';
+const mnemonic = ' ' //your memonic;
 const provider = new ethers.providers.JsonRpcProvider(bscMainnetUrl)
 const wallet = ethers.Wallet.fromMnemonic(mnemonic);
 const account = wallet.connect(provider);
@@ -89,7 +89,7 @@ const run = async () => {
     if(jmlBnb > data.maxBnb){
     console.log('beli');
     initialLiquidityDetected = true;
-      return 'ok beli';
+      // return 'ok beli';
    //We buy x amount of the new token for our wbnb
    const amountIn = ethers.utils.parseUnits(`${data.AMOUNT_OF_WBNB}`, 'ether');
    const amounts = await router.getAmountsOut(amountIn, [tokenIn, tokenOut]);
