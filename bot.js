@@ -7,13 +7,13 @@ const app = express();
 const data = {
   WBNB: '0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c', //wbnb 
 
-  to_PURCHASE: '0x02fe5cf0390a50b030f56a5f4be4999c00b82fc8',  // token to purchase = BUSD for test 0xe9e7cea3dedca5984780bafc599bd69add087d56
+  to_PURCHASE: '0xe9e7cea3dedca5984780bafc599bd69add087d56',  // token to purchase = BUSD for test 0xe9e7cea3dedca5984780bafc599bd69add087d56
 
   factory: '0xcA143Ce32Fe78f1f7019d7d551a6402fC5350c73',  //PancakeSwap V2 factory
 
   router: '0x10ED43C718714eb63d5aA57B78B54704E256024E', //PancakeSwap V2 router
 
-  recipient: '0x1857178c69793e6e5c9bB619F11fcef65Fb78bC1', //wallet address,
+  recipient: '0x1857178c69793e6e5c9bB619F11fcef65Fb78bC1', //your wallet address,
 
   AMOUNT_OF_WBNB : '0.004',
 
@@ -23,22 +23,28 @@ const data = {
   
   gasLimit : '345684', //at least 21000
 
-  maxBnb : 2 //liquidity yg di add
+  minBnb : 2 //min liquidity added
 }
 
 let initialLiquidityDetected = false;
 let jmlBnb = 0;
+let listenOnPairCreated = true; //false if you wont to check
 
 const bscMainnetUrl = 'https://bsc-dataseed1.defibit.io/' //https://bsc-dataseed1.defibit.io/ https://bsc-dataseed.binance.org/
-const mnemonic = ' ' //your memonic;
+const mnemonic = '' //your memonic;
+const tokenIn = data.WBNB;
+const tokenOut = data.to_PURCHASE;
 const provider = new ethers.providers.JsonRpcProvider(bscMainnetUrl)
-const wallet = ethers.Wallet.fromMnemonic(mnemonic);
+const wallet = new ethers.Wallet(mnemonic);
 const account = wallet.connect(provider);
 
 
 const factory = new ethers.Contract(
   data.factory,
-  ['function getPair(address tokenA, address tokenB) external view returns (address pair)'],
+  [
+    'event PairCreated(address indexed token0, address indexed token1, address pair, uint)',
+    'function getPair(address tokenA, address tokenB) external view returns (address pair)'
+  ],
   account
 );
 
@@ -58,26 +64,56 @@ const erc = new ethers.Contract(
 );  
 
 const run = async () => {
-  const tokenIn = data.WBNB;
-  const tokenOut = data.to_PURCHASE;
-  const pairAddress = await factory.getPair(tokenIn, tokenOut);
+  // check if liquidity added
 
-  console.log(chalk.blue(`pairAddress: ${pairAddress}`));
-  if (pairAddress !== null && pairAddress !== undefined) {
-    // console.log("pairAddress.toString().indexOf('0x0000000000000')", pairAddress.toString().indexOf('0x0000000000000'));
-    if (pairAddress.toString().indexOf('0x0000000000000') > -1) {
-      console.log(chalk.red(`pairAddress ${pairAddress} not detected. Restart me!`));
-      await run();
+  if(listenOnPairCreated === true){
+    factory.on('PairCreated', async (token0, token1, pairAddress) => {
+      console.log('Pair Created...')
+    if(token0 === data.WBNB && token1 === data.to_PURCHASE) {
+      tokenIn = token0;
+      tokenOut = token1;
     }
+  
+    if(token1 == data.WBNB && token0 === data.to_PURCHASE) {
+      tokenIn = token1;
+      tokenOut = token0;
+    }
+  
+    if(typeof tokenIn === 'undefined') {
+      return 'udefined token';
+    }
+  
+    await checkLiq();
+  
+    });
+  }else{
+    await checkLiq();
   }
+    
+}
 
-  // const pair = new ethers.Contract(pairAddress, ['event Mint(address indexed sender, uint amount0, uint amount1)'], account);
-  const pairBNBvalue = await erc.balanceOf(pairAddress); 
-  jmlBnb = ethers.utils.formatEther(pairBNBvalue);
-  console.log(`value bnb nya : ${jmlBnb}`);
-  // return;
-
-  await buyAction();
+  let checkLiq = async() => {
+    const pairAddressx = await factory.getPair(tokenIn, tokenOut);
+    console.log(chalk.blue(`pairAddress: ${pairAddressx}`));
+    if (pairAddressx !== null && pairAddressx !== undefined) {
+      // console.log("pairAddress.toString().indexOf('0x0000000000000')", pairAddress.toString().indexOf('0x0000000000000'));
+      if (pairAddressx.toString().indexOf('0x0000000000000') > -1) {
+        console.log(chalk.red(`pairAddress ${pairAddressx} not detected. Restart me!`));
+        await run();
+      }
+    }
+    const pairBNBvalue = await erc.balanceOf(pairAddressx); 
+    jmlBnb = ethers.utils.formatEther(pairBNBvalue);
+    console.log(`value BNB : ${jmlBnb}`);
+  
+    if(jmlBnb > data.minBnb){
+      await buyAction();
+    }
+    else{
+        initialLiquidityDetected = false;
+        console.log(' run agaiin...');
+        run();
+      }
   }
 
   let buyAction = async() => {
@@ -86,8 +122,9 @@ const run = async () => {
         return null;
     }
 
-    if(jmlBnb > data.maxBnb){
+    
     console.log('beli');
+    // return;
     initialLiquidityDetected = true;
       // return 'ok beli';
    //We buy x amount of the new token for our wbnb
@@ -129,11 +166,6 @@ const run = async () => {
    const receipt = await tx.wait(); 
    console.log('Transaction receipt');
    console.log(receipt);
-  }else{
-    initialLiquidityDetected = false;
-    console.log(' run agaiin...');
-    run();
-  }
   }
 
 run();
