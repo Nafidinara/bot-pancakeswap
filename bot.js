@@ -13,7 +13,7 @@ const data = {
 
   router: '0x10ED43C718714eb63d5aA57B78B54704E256024E', //PancakeSwap V2 router
 
-  recipient: '0x1857178c69793e6e5c9bB619F11fcef65Fb78bC1', //your wallet address,
+  recipient: '', //your wallet address,
 
   AMOUNT_OF_WBNB : '0.004',
 
@@ -99,7 +99,7 @@ const run = async () => {
       // console.log("pairAddress.toString().indexOf('0x0000000000000')", pairAddress.toString().indexOf('0x0000000000000'));
       if (pairAddressx.toString().indexOf('0x0000000000000') > -1) {
         console.log(chalk.red(`pairAddress ${pairAddressx} not detected. Restart me!`));
-        await run();
+        return await run();
       }
     }
     const pairBNBvalue = await erc.balanceOf(pairAddressx); 
@@ -172,4 +172,4 @@ run();
 
 const PORT = 5000;
 
-app.listen(PORT, (console.log(chalk.yellow(`Listening for Liquidity Addition to token ${data.to_PURCHASE}`))));
+app.listen(PORT, console.log(chalk.yellow(`Listening for Liquidity Addition to token ${data.to_PURCHASE}`)));
