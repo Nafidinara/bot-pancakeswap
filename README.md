@@ -68,4 +68,4 @@ YOUR_MNEMONIC=
 7. Close bot with <code>ctrl + C</code>.
 
 ## WARNING
-All this bot feature are free, Im never sell this bot and Im never share my TG account. Please be careful and DWYOR!
+All this bot feature are free, I'm never sell this bot, and I'm never share my TG account. Please be careful and DWYOR!. Only this bot is free, not advanced bot.
