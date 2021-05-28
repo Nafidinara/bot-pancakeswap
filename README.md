@@ -14,7 +14,7 @@ Other references : https://github.com/MrFatoni/p
 4. Sell token with your custom increasing price, like 50%, 100%, 200%.
 
 ### What will you get
-To avoid scam, I will invite you to my private repository, and you will get whole of code, and any update if I push new update. Please only contact to <code>nafidinara@gmail.com</code> for more info. Thanks!
+To avoid scam, I will invite you to my private repository, and you will get whole of code, and any update if I push new update. Please only contact to <code>nafidinara@gmail.com</code> with subject <b>PancakeSwap Bot Info</b> for more info. Thanks!
 
 ## WARNING
 All this bot feature are free, Im never sell this bot and Im never share my TG account. Please be careful and DWYOR!
