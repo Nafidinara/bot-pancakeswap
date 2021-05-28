@@ -1,37 +1,38 @@
 import ethers from 'ethers';
 import express from 'express';
 import chalk from 'chalk';
+import dotenv from 'dotenv';
 
 const app = express();
+dotenv.config();
 
 const data = {
-  WBNB: '0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c', //wbnb 
+  WBNB: process.env.WBNB_CONTRACT, //wbnb
 
-  to_PURCHASE: '0xe9e7cea3dedca5984780bafc599bd69add087d56',  // token to purchase = BUSD for test 0xe9e7cea3dedca5984780bafc599bd69add087d56
+  to_PURCHASE: '0xe9e7cea3dedca5984780bafc599bd69add087d56',  // token that you will purchase = BUSD for test '0xe9e7cea3dedca5984780bafc599bd69add087d56'
 
-  factory: '0xcA143Ce32Fe78f1f7019d7d551a6402fC5350c73',  //PancakeSwap V2 factory
+  AMOUNT_OF_WBNB : '0.004', // how much you want to buy in WBNB
 
-  router: '0x10ED43C718714eb63d5aA57B78B54704E256024E', //PancakeSwap V2 router
+  factory: process.env.FACTORY,  //PancakeSwap V2 factory
 
-  recipient: '', //your wallet address,
+  router: process.env.ROUTER, //PancakeSwap V2 router
 
-  AMOUNT_OF_WBNB : '0.004',
+  recipient: process.env.YOUR_ADDRESS, //your wallet address,
 
-  Slippage : '5', //in Percentage
+  Slippage : process.env.SLIPPAGE, //in Percentage
 
-  gasPrice : '5', //in gwei
+  gasPrice : process.env.GWEI, //in gwei
   
-  gasLimit : '345684', //at least 21000
+  gasLimit : process.env.GAS_LIMIT, //at least 21000
 
-  minBnb : 2 //min liquidity added
+  minBnb : process.env.MIN_LIQUIDITY_ADDED //min liquidity added
 }
 
 let initialLiquidityDetected = false;
 let jmlBnb = 0;
-let listenOnPairCreated = true; //false if you wont to check
 
 const bscMainnetUrl = 'https://bsc-dataseed1.defibit.io/' //https://bsc-dataseed1.defibit.io/ https://bsc-dataseed.binance.org/
-const mnemonic = '' //your memonic;
+const mnemonic = process.env.YOUR_MNEMONIC //your memonic;
 const tokenIn = data.WBNB;
 const tokenOut = data.to_PURCHASE;
 const provider = new ethers.providers.JsonRpcProvider(bscMainnetUrl)
@@ -64,32 +65,7 @@ const erc = new ethers.Contract(
 );  
 
 const run = async () => {
-  // check if liquidity added
-
-  if(listenOnPairCreated === true){
-    factory.on('PairCreated', async (token0, token1, pairAddress) => {
-      console.log('Pair Created...')
-    if(token0 === data.WBNB && token1 === data.to_PURCHASE) {
-      tokenIn = token0;
-      tokenOut = token1;
-    }
-  
-    if(token1 == data.WBNB && token0 === data.to_PURCHASE) {
-      tokenIn = token1;
-      tokenOut = token0;
-    }
-  
-    if(typeof tokenIn === 'undefined') {
-      return 'udefined token';
-    }
-  
     await checkLiq();
-  
-    });
-  }else{
-    await checkLiq();
-  }
-    
 }
 
   let checkLiq = async() => {
@@ -98,7 +74,7 @@ const run = async () => {
     if (pairAddressx !== null && pairAddressx !== undefined) {
       // console.log("pairAddress.toString().indexOf('0x0000000000000')", pairAddress.toString().indexOf('0x0000000000000'));
       if (pairAddressx.toString().indexOf('0x0000000000000') > -1) {
-        console.log(chalk.red(`pairAddress ${pairAddressx} not detected. Restart me!`));
+        console.log(chalk.red(`pairAddress ${pairAddressx} not detected. Auto restart`));
         return await run();
       }
     }
@@ -111,22 +87,20 @@ const run = async () => {
     }
     else{
         initialLiquidityDetected = false;
-        console.log(' run agaiin...');
-        run();
+        console.log(' run again...');
+        return await run();
       }
   }
 
   let buyAction = async() => {
     if(initialLiquidityDetected === true) {
-      console.log('tidak beli');
+      console.log('not buy cause already buy');
         return null;
     }
 
     
-    console.log('beli');
-    // return;
+    console.log('ready to buy');
     initialLiquidityDetected = true;
-      // return 'ok beli';
    //We buy x amount of the new token for our wbnb
    const amountIn = ethers.utils.parseUnits(`${data.AMOUNT_OF_WBNB}`, 'ether');
    const amounts = await router.getAmountsOut(amountIn, [tokenIn, tokenOut]);
@@ -135,7 +109,7 @@ const run = async () => {
    const amountOutMin = amounts[1].sub(amounts[1].div(`${data.Slippage}`)); 
 
    console.log(
-    chalk.green.inverse(`Liquidity Addition Detected\n`)
+    chalk.green.inverse(`Start to buy \n`)
      +
      `Buying Token
      =================
@@ -164,8 +138,8 @@ const run = async () => {
    });
   
    const receipt = await tx.wait(); 
-   console.log('Transaction receipt');
-   console.log(receipt);
+   console.log(`Transaction receipt : https://www.bscscan.com/tx/${receipt.logs[1].transactionHash}`);
+   return receipt;
   }
 
 run();

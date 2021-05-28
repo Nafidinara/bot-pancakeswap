@@ -5,12 +5,14 @@
   "main": "bot.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "snipe" : "node bot.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "chalk": "^4.1.1",
+    "dotenv": "^10.0.0",
     "ethers": "^5.1.4",
     "express": "^4.17.1"
   }
