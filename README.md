@@ -60,12 +60,15 @@ YOUR_MNEMONIC=
 ~ Input your private Key here, that you get from your wallet privacy.
 
 ```
-5. run with <code>npm run snipe </code>.
+5. Approve your WBNB in pancake like this
+   <img src="./assets/img.png">
 
-6. Wait the bot do his job, if success, you will see like this picture. <br>
+6. run with <code>npm run snipe </code>.
+
+7. Wait the bot do his job, if success, you will see like this picture. <br>
    <img src="./assets/botimg.PNG">
    
-7. Close bot with <code>ctrl + C</code>.
+8. Close bot with <code>ctrl + C</code>.
 
 ## WARNING
 All this bot feature are free, I'm never sell this bot, and I'm never share my TG account. Please be careful and DWYOR!. Only this bot is free, not advanced bot.
