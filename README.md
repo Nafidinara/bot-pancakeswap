@@ -44,10 +44,10 @@ YOUR_ADDRESS=
 ~ Your BSC (BEP20) address from trustwallet or another wallet.
 
 SLIPPAGE=1
-~ Customize your slippage here, cannot decimal. (eg : 1, 5, 10).
+~ Customize your slippage here, cannot decimal. (eg : 1, 5, 10). if you buy early token recommended 30+ Slippage
 
 GWEI=5
-~ Customize your GWEI (gas fee) here, cannot decimal. (eg : 5, 10, 25).
+~ Customize your GWEI (gas fee) here, cannot decimal. (eg : 5, 10, 25). if you buy early token recommended 15+ GWEI
 
 GAS_LIMIT=345684
 ~ Minimul limit is 210000, more much more better.
