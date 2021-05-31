@@ -32,12 +32,12 @@ let initialLiquidityDetected = false;
 let jmlBnb = 0;
 
 const bscMainnetUrl = 'https://bsc-dataseed1.defibit.io/' //https://bsc-dataseed1.defibit.io/ https://bsc-dataseed.binance.org/
-const wss = 'wss://bsc-ws-node.nariox.org:443'
+const wss = 'wss://bsc-ws-node.nariox.org:443';
 const mnemonic = process.env.YOUR_MNEMONIC //your memonic;
 const tokenIn = data.WBNB;
 const tokenOut = data.to_PURCHASE;
 // const provider = new ethers.providers.JsonRpcProvider(bscMainnetUrl)
-const provider = new ethers.providers.WebSocketProvider(wss)
+const provider = new ethers.providers.WebSocketProvider(wss);
 const wallet = new ethers.Wallet(mnemonic);
 const account = wallet.connect(provider);
 
