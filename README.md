@@ -3,6 +3,7 @@
 * [Important Notes](#IMPORTANT-NOTES-BEFORE-RUNNING-THE-BOT)
 * [Advanced Bot](#NOW-LAUNCH-ADVANCED-BOT)
 * [Setup](#HOW-TO-RUN)
+* [TroubleShoot](#TROUBLESHOOT)
 
 ## IMPORTANT NOTES BEFORE RUNNING THE BOT
 Just edit some part of the bot, you can see the origin at : https://github.com/T0Th3M00n/pancakeswap-sniping-bot
@@ -72,3 +73,10 @@ YOUR_MNEMONIC=
 
 ## WARNING
 All this bot feature are free, I'm never sell this bot, and I'm never share my TG account. Please be careful and DWYOR!. Only this bot is free, not advanced bot.
+
+## TROUBLESHOOT
+* there are some reason if your tx failed :
+- you haven't approve your WBNB
+- your gas price are to small
+- your GWEI are to small (use 15+ for early token)
+- your slippage are to small (use 30+ for early token)
