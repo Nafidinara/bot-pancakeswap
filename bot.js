@@ -11,7 +11,7 @@ const data = {
 
   to_PURCHASE: '0xe9e7cea3dedca5984780bafc599bd69add087d56',  // token that you will purchase = BUSD for test '0xe9e7cea3dedca5984780bafc599bd69add087d56'
 
-  AMOUNT_OF_WBNB : '0.004', // how much you want to buy in WBNB
+  AMOUNT_OF_WBNB : '0.002', // how much you want to buy in WBNB
 
   factory: process.env.FACTORY,  //PancakeSwap V2 factory
 
@@ -85,7 +85,7 @@ const run = async () => {
     console.log(`value BNB : ${jmlBnb}`);
   
     if(jmlBnb > data.minBnb){
-      await buyAction();
+        setTimeout(() => buyAction(), 3000);
     }
     else{
         initialLiquidityDetected = false;
@@ -99,7 +99,6 @@ const run = async () => {
       console.log('not buy cause already buy');
         return null;
     }
-
     
     console.log('ready to buy');
     initialLiquidityDetected = true;
@@ -133,10 +132,11 @@ const run = async () => {
      amountOutMin,
      [tokenIn, tokenOut],
      data.recipient,
-     Date.now() + 1000 * 60 * 10, //10 minutes
+     Date.now() + 10 * 60 * 10, //10 minutes
      {
        'gasLimit': data.gasLimit,
-       'gasPrice': ethers.utils.parseUnits(`${data.gasPrice}`, 'gwei')
+       'gasPrice': ethers.utils.parseUnits(`${data.gasPrice}`, 'gwei'),
+         'nonce' : 25 //set you want buy at where position in blocks
    });
   
    const receipt = await tx.wait(); 
