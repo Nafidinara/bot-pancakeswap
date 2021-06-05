@@ -60,6 +60,13 @@ MIN_LIQUIDITY_ADDED=3
 YOUR_MNEMONIC=
 ~ Input your private Key here, that you get from your wallet privacy.
 
+AMOUNT_OF_WBNB=0.002
+~ Amount how much you want buy the token in WBNB.
+
+TO_PURCHASE=0xe9e7cea3dedca5984780bafc599bd69add087d56
+~ Token address that you want to buy.
+
+
 ```
 5. Approve your WBNB in pancake like this
    <img src="./assets/img.png">

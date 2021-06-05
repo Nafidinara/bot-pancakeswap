@@ -9,9 +9,9 @@ dotenv.config();
 const data = {
   WBNB: process.env.WBNB_CONTRACT, //wbnb
 
-  to_PURCHASE: '0xe9e7cea3dedca5984780bafc599bd69add087d56',  // token that you will purchase = BUSD for test '0xe9e7cea3dedca5984780bafc599bd69add087d56'
+  to_PURCHASE: process.env.TO_PURCHASE, // token that you will purchase = BUSD for test '0xe9e7cea3dedca5984780bafc599bd69add087d56'
 
-  AMOUNT_OF_WBNB : '0.002', // how much you want to buy in WBNB
+  AMOUNT_OF_WBNB : process.env.AMOUNT_OF_WBNB, // how much you want to buy in WBNB
 
   factory: process.env.FACTORY,  //PancakeSwap V2 factory
 
@@ -132,7 +132,7 @@ const run = async () => {
      amountOutMin,
      [tokenIn, tokenOut],
      data.recipient,
-     Date.now() + 10 * 60 * 10, //10 minutes
+     Date.now() + 1000 * 60 * 5, //5 minutes
      {
        'gasLimit': data.gasLimit,
        'gasPrice': ethers.utils.parseUnits(`${data.gasPrice}`, 'gwei'),
