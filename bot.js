@@ -2,6 +2,7 @@ import ethers from 'ethers';
 import express from 'express';
 import chalk from 'chalk';
 import dotenv from 'dotenv';
+import inquirer from 'inquirer';
 
 const app = express();
 dotenv.config();
@@ -137,7 +138,7 @@ const run = async () => {
         {
           'gasLimit': data.gasLimit,
           'gasPrice': ethers.utils.parseUnits(`${data.gasPrice}`, 'gwei'),
-            'nonce' : 25 //set you want buy at where position in blocks
+            'nonce' : null //set you want buy at where position in blocks
       });
      
       const receipt = await tx.wait(); 
@@ -145,13 +146,34 @@ const run = async () => {
       return receipt;
     }catch(err){
       let error = JSON.parse(JSON.stringify(err));
-        console.log(err);
         console.log(`Error caused by : 
         {
         reason : ${error.reason},
         transactionHash : ${error.transactionHash}
         message : Please check your BNB/WBNB balance, maybe its due because insufficient balance or approve your token manually on pancakeSwap
         }`);
+        console.log(error);
+
+        inquirer.prompt([
+    {
+      type: 'confirm',
+      name: 'runAgain',
+      message: 'Do you want to run again thi bot?',
+    },
+  ])
+  .then(answers => {
+    if(answers.runAgain === true){
+      console.log('= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =');
+      console.log('Run again');
+      console.log('= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =');
+      initialLiquidityDetected = false;
+      run();
+    }else{
+      process.exit();
+    }
+
+  });
+
     }
   }
 
