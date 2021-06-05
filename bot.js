@@ -101,47 +101,58 @@ const run = async () => {
     }
     
     console.log('ready to buy');
-    initialLiquidityDetected = true;
-   //We buy x amount of the new token for our wbnb
-   const amountIn = ethers.utils.parseUnits(`${data.AMOUNT_OF_WBNB}`, 'ether');
-   const amounts = await router.getAmountsOut(amountIn, [tokenIn, tokenOut]);
-  
-   //Our execution price will be a bit different, we need some flexbility
-   const amountOutMin = amounts[1].sub(amounts[1].div(`${data.Slippage}`)); 
-
-   console.log(
-    chalk.green.inverse(`Start to buy \n`)
-     +
-     `Buying Token
-     =================
-     tokenIn: ${amountIn.toString()} ${tokenIn} (WBNB)
-     tokenOut: ${amountOutMin.toString()} ${tokenOut}
-   `);
-  
-   console.log('Processing Transaction.....');
-   console.log(chalk.yellow(`amountIn: ${amountIn}`));
-   console.log(chalk.yellow(`amountOutMin: ${amountOutMin}`));
-   console.log(chalk.yellow(`tokenIn: ${tokenIn}`));
-   console.log(chalk.yellow(`tokenOut: ${tokenOut}`));
-   console.log(chalk.yellow(`data.recipient: ${data.recipient}`));
-   console.log(chalk.yellow(`data.gasLimit: ${data.gasLimit}`));
-   console.log(chalk.yellow(`data.gasPrice: ${ethers.utils.parseUnits(`${data.gasPrice}`, 'gwei')}`));
-  
-   const tx = await router.swapExactTokensForTokens(
-     amountIn,
-     amountOutMin,
-     [tokenIn, tokenOut],
-     data.recipient,
-     Date.now() + 1000 * 60 * 5, //5 minutes
-     {
-       'gasLimit': data.gasLimit,
-       'gasPrice': ethers.utils.parseUnits(`${data.gasPrice}`, 'gwei'),
-         'nonce' : 25 //set you want buy at where position in blocks
-   });
-  
-   const receipt = await tx.wait(); 
-   console.log(`Transaction receipt : https://www.bscscan.com/tx/${receipt.logs[1].transactionHash}`);
-   return receipt;
+    try{
+      initialLiquidityDetected = true;
+      //We buy x amount of the new token for our wbnb
+      const amountIn = ethers.utils.parseUnits(`${data.AMOUNT_OF_WBNB}`, 'ether');
+      const amounts = await router.getAmountsOut(amountIn, [tokenIn, tokenOut]);
+     
+      //Our execution price will be a bit different, we need some flexbility
+      const amountOutMin = amounts[1].sub(amounts[1].div(`${data.Slippage}`)); 
+   
+      console.log(
+       chalk.green.inverse(`Start to buy \n`)
+        +
+        `Buying Token
+        =================
+        tokenIn: ${amountIn.toString()} ${tokenIn} (WBNB)
+        tokenOut: ${amountOutMin.toString()} ${tokenOut}
+      `);
+     
+      console.log('Processing Transaction.....');
+      console.log(chalk.yellow(`amountIn: ${amountIn}`));
+      console.log(chalk.yellow(`amountOutMin: ${amountOutMin}`));
+      console.log(chalk.yellow(`tokenIn: ${tokenIn}`));
+      console.log(chalk.yellow(`tokenOut: ${tokenOut}`));
+      console.log(chalk.yellow(`data.recipient: ${data.recipient}`));
+      console.log(chalk.yellow(`data.gasLimit: ${data.gasLimit}`));
+      console.log(chalk.yellow(`data.gasPrice: ${ethers.utils.parseUnits(`${data.gasPrice}`, 'gwei')}`));
+     
+      const tx = await router.swapExactTokensForTokens(
+        amountIn,
+        amountOutMin,
+        [tokenIn, tokenOut],
+        data.recipient,
+        Date.now() + 1000 * 60 * 5, //5 minutes
+        {
+          'gasLimit': data.gasLimit,
+          'gasPrice': ethers.utils.parseUnits(`${data.gasPrice}`, 'gwei'),
+            'nonce' : 25 //set you want buy at where position in blocks
+      });
+     
+      const receipt = await tx.wait(); 
+      console.log(`Transaction receipt : https://www.bscscan.com/tx/${receipt.logs[1].transactionHash}`);
+      return receipt;
+    }catch(err){
+      let error = JSON.parse(JSON.stringify(err));
+        console.log(err);
+        console.log(`Error caused by : 
+        {
+        reason : ${error.reason},
+        transactionHash : ${error.transactionHash}
+        message : Please check your BNB/WBNB balance, maybe its due because insufficient balance or approve your token manually on pancakeSwap
+        }`);
+    }
   }
 
 run();
