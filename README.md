@@ -6,10 +6,10 @@
 * [TroubleShoot](#TROUBLESHOOT)
 
 ## IMPORTANT NOTES BEFORE RUNNING THE BOT
-Just edit some part of the bot, you can see the origin at : https://github.com/T0Th3M00n/pancakeswap-sniping-bot
-Docs : https://github.com/T0Th3M00n/pancakeswap-sniping-bot/blob/main/README.md
+Just edit some part of the bot, you can see the origin at : https://github.com/MrFatoni/p
 
-Other references : https://github.com/MrFatoni/p
+You wanna use this bot, but you dont know how to setup, this video will help you solve your problems. Contacts me on discord if you hare questions.
+https://youtu.be/9DOu19CLUi0
 
 ## NOW LAUNCH ADVANCED BOT
 Now I'm provided advanced bot with additional feature that you make more easy to snipe.
