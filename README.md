@@ -9,7 +9,7 @@
 Just edit some part of the bot, you can see the origin at : https://github.com/MrFatoni/p
 
 You wanna use this bot, but you dont know how to setup, this video will help you solve your problems. Contacts me on discord if you hare questions.
-https://youtu.be/9DOu19CLUi0
+https://www.youtube.com/watch?v=HPkWbtS0Hg4
 
 ## NOW LAUNCH ADVANCED BOT
 Now I'm provided advanced bot with additional feature that you make more easy to snipe.
