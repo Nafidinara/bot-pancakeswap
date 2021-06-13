@@ -22,7 +22,7 @@ const data = {
 
   Slippage : process.env.SLIPPAGE, //in Percentage
 
-  gasPrice : process.env.GWEI, //in gwei
+  gasPrice : ethers.utils.parseUnits(`${process.env.GWEI}`, 'gwei'), //in gwei
   
   gasLimit : process.env.GAS_LIMIT, //at least 21000
 
@@ -56,7 +56,8 @@ const router = new ethers.Contract(
   data.router,
   [
     'function getAmountsOut(uint amountIn, address[] memory path) public view returns (uint[] memory amounts)',
-    'function swapExactTokensForTokens(uint amountIn, uint amountOutMin, address[] calldata path, address to, uint deadline) external returns (uint[] memory amounts)'
+    'function swapExactTokensForTokens(uint amountIn, uint amountOutMin, address[] calldata path, address to, uint deadline) external returns (uint[] memory amounts)',
+    'function swapExactTokensForTokensSupportingFeeOnTransferTokens(uint amountIn, uint amountOutMin, address[] calldata path, address to, uint deadline) external returns (uint[] memory amounts)'
   ],
   account
 );
@@ -116,20 +117,21 @@ const run = async () => {
         +
         `Buying Token
         =================
-        tokenIn: ${amountIn.toString()} ${tokenIn} (WBNB)
+        tokenIn: ${(amountIn * 1e-18).toString()} ${tokenIn} (BNB)
         tokenOut: ${amountOutMin.toString()} ${tokenOut}
       `);
      
       console.log('Processing Transaction.....');
-      console.log(chalk.yellow(`amountIn: ${amountIn}`));
+      console.log(chalk.yellow(`amountIn: ${(amountIn * 1e-18)} ${tokenIn} (BNB)`));
       console.log(chalk.yellow(`amountOutMin: ${amountOutMin}`));
       console.log(chalk.yellow(`tokenIn: ${tokenIn}`));
       console.log(chalk.yellow(`tokenOut: ${tokenOut}`));
       console.log(chalk.yellow(`data.recipient: ${data.recipient}`));
       console.log(chalk.yellow(`data.gasLimit: ${data.gasLimit}`));
-      console.log(chalk.yellow(`data.gasPrice: ${ethers.utils.parseUnits(`${data.gasPrice}`, 'gwei')}`));
-     
-      const tx = await router.swapExactTokensForTokens(
+      console.log(chalk.yellow(`data.gasPrice: ${data.gasPrice}`));
+
+      const tx = await router.swapExactTokensForTokensSupportingFeeOnTransferTokens( //uncomment this if you want to buy deflationary token
+      // const tx = await router.swapExactTokensForTokens( //uncomment here if you want to buy token
         amountIn,
         amountOutMin,
         [tokenIn, tokenOut],
@@ -137,13 +139,13 @@ const run = async () => {
         Date.now() + 1000 * 60 * 5, //5 minutes
         {
           'gasLimit': data.gasLimit,
-          'gasPrice': ethers.utils.parseUnits(`${data.gasPrice}`, 'gwei'),
+          'gasPrice': data.gasPrice,
             'nonce' : null //set you want buy at where position in blocks
       });
      
       const receipt = await tx.wait(); 
       console.log(`Transaction receipt : https://www.bscscan.com/tx/${receipt.logs[1].transactionHash}`);
-      return receipt;
+      setTimeout(() => {process.exit()},2000);
     }catch(err){
       let error = JSON.parse(JSON.stringify(err));
         console.log(`Error caused by : 
