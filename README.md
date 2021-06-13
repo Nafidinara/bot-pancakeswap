@@ -8,8 +8,11 @@
 ## IMPORTANT NOTES BEFORE RUNNING THE BOT
 Just edit some part of the bot, you can see the origin at : https://github.com/MrFatoni/p
 
-You wanna use this bot, but you dont know how to setup, this video will help you solve your problems. Contacts me on discord if you hare questions.
-https://www.youtube.com/watch?v=HPkWbtS0Hg4
+### Demo for free version :
+https://youtu.be/gHjE5S6Ir5E
+
+### Demo for sonic advanced bot :
+https://youtu.be/O9KEhQHVRfg
 
 ## NOW LAUNCH ADVANCED BOT
 Now I'm provided advanced bot with additional feature that you make more easy to snipe.
