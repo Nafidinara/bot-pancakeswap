@@ -8,9 +8,6 @@
 ## IMPORTANT NOTES BEFORE RUNNING THE BOT
 Just edit some part of the bot, you can see the origin at : https://github.com/MrFatoni/p
 
-### Demo for free version :
-https://youtu.be/gHjE5S6Ir5E
-
 ### Demo for sonic advanced bot :
 https://bit.ly/3vkSum0
 
