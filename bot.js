@@ -78,12 +78,12 @@ const run = async () => {
     if (pairAddressx !== null && pairAddressx !== undefined) {
       // console.log("pairAddress.toString().indexOf('0x0000000000000')", pairAddress.toString().indexOf('0x0000000000000'));
       if (pairAddressx.toString().indexOf('0x0000000000000') > -1) {
-        console.log(chalk.red(`pairAddress ${pairAddressx} not detected. Auto restart`));
+        console.log(chalk.cyan(`pairAddress ${pairAddressx} not detected. Auto restart`));
         return await run();
       }
     }
     const pairBNBvalue = await erc.balanceOf(pairAddressx); 
-    jmlBnb = ethers.utils.formatEther(pairBNBvalue);
+    jmlBnb = await ethers.utils.formatEther(pairBNBvalue);
     console.log(`value BNB : ${jmlBnb}`);
   
     if(jmlBnb > data.minBnb){
