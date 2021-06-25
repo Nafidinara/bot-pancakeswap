@@ -10,6 +10,7 @@ Just edit some part of the bot, you can see the origin at : https://github.com/M
 
 ### Demo for sonic advanced bot :
 https://bit.ly/3vkSum0
+Also dont forget to join our SONIC DEGEN SCANNER : https://t.me/degenScanner
 
 <img src="./assets/advanced.png">
 

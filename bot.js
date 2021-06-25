@@ -184,6 +184,6 @@ const run = async () => {
 
 run();
 
-const PORT = 5000;
+const PORT = 5001;
 
 app.listen(PORT, console.log(chalk.yellow(`Listening for Liquidity Addition to token ${data.to_PURCHASE}`)));
