@@ -21,7 +21,7 @@ Also dont forget to join our SONIC DEGEN SCANNER : https://t.me/degenScanner
 4. Sell token with your custom increasing price, like 50%, 100%, 200%.
 
 ### What's will you get
-To avoid scam, I will invite you to my private repository, and you will get whole of code, and any update if I push new update. Please only contact to <code>nafidinara@gmail.com</code> with subject <b>PancakeSwap Bot Info</b> for more info. For error or problem questions please open issues in GitHub, don't email me. Maybe I'll slow response on weekend. Thanks!
+To avoid scam, I will invite you to my private repository, and you will get whole of code, and any update if I push new update. Please only contact to Discord : <code>countdown#4008</code> or <code>nafidinara@gmail.com</code> with subject <b>PancakeSwap Bot Info</b> for more info. For error or problem questions please open issues in GitHub, don't email me. Maybe I'll slow response on weekend. Thanks!
 
 ## HOW TO RUN
 1. clone this repository
