@@ -9,8 +9,10 @@
 Just edit some part of the bot, you can see the origin at : https://github.com/MrFatoni/p
 
 ### Demo for sonic advanced bot :
-https://bit.ly/3vkSum0
-Also dont forget to join our SONIC DEGEN SCANNER : https://t.me/degenScanner
+1. https://bit.ly/3vkSum0
+2. SONIC DEGEN SCANNER : https://t.me/degenScanner
+3. youtube channel : https://bit.ly/3ABcHHW
+4. gitbook : https://sonic-advance-bot.gitbook.io/sonic/
 
 <img src="./assets/advanced.png">
 
