@@ -23,7 +23,7 @@ const data = {
   Slippage : process.env.SLIPPAGE, //in Percentage
 
   gasPrice : ethers.utils.parseUnits(`${process.env.GWEI}`, 'gwei'), //in gwei
-  
+
   gasLimit : process.env.GAS_LIMIT, //at least 21000
 
   minBnb : process.env.MIN_LIQUIDITY_ADDED //min liquidity added
@@ -32,8 +32,7 @@ const data = {
 let initialLiquidityDetected = false;
 let jmlBnb = 0;
 
-const bscMainnetUrl = 'https://bsc-dataseed1.defibit.io/' //https://bsc-dataseed1.defibit.io/ https://bsc-dataseed.binance.org/
-const wss = 'wss://bsc-ws-node.nariox.org:443';
+const wss = process.env.WSS_NODE;
 const mnemonic = process.env.YOUR_MNEMONIC //your memonic;
 const tokenIn = data.WBNB;
 const tokenOut = data.to_PURCHASE;
@@ -66,7 +65,7 @@ const erc = new ethers.Contract(
   data.WBNB,
   [{"constant": true,"inputs": [{"name": "_owner","type": "address"}],"name": "balanceOf","outputs": [{"name": "balance","type": "uint256"}],"payable": false,"type": "function"}],
   account
-);  
+);
 
 const run = async () => {
     await checkLiq();
@@ -82,10 +81,10 @@ const run = async () => {
         return await run();
       }
     }
-    const pairBNBvalue = await erc.balanceOf(pairAddressx); 
+    const pairBNBvalue = await erc.balanceOf(pairAddressx);
     jmlBnb = await ethers.utils.formatEther(pairBNBvalue);
     console.log(`value BNB : ${jmlBnb}`);
-  
+
     if(jmlBnb > data.minBnb){
         setTimeout(() => buyAction(), 3000);
     }
@@ -101,7 +100,7 @@ const run = async () => {
       console.log('not buy cause already buy');
         return null;
     }
-    
+
     console.log('ready to buy');
     try{
       initialLiquidityDetected = true;
@@ -114,7 +113,7 @@ const run = async () => {
         //Our execution price will be a bit different, we need some flexbility
         const amountOutMin = amounts[1].sub(amounts[1].div(`${data.Slippage}`));
       }
-   
+
       console.log(
        chalk.green.inverse(`Start to buy \n`)
         +
@@ -123,7 +122,7 @@ const run = async () => {
         tokenIn: ${(amountIn * 1e-18).toString()} ${tokenIn} (BNB)
         tokenOut: ${amountOutMin.toString()} ${tokenOut}
       `);
-     
+
       console.log('Processing Transaction.....');
       console.log(chalk.yellow(`amountIn: ${(amountIn * 1e-18)} ${tokenIn} (BNB)`));
       console.log(chalk.yellow(`amountOutMin: ${amountOutMin}`));
@@ -133,8 +132,8 @@ const run = async () => {
       console.log(chalk.yellow(`data.gasLimit: ${data.gasLimit}`));
       console.log(chalk.yellow(`data.gasPrice: ${data.gasPrice}`));
 
-      const tx = await router.swapExactTokensForTokensSupportingFeeOnTransferTokens( //uncomment this if you want to buy deflationary token
-      // const tx = await router.swapExactTokensForTokens( //uncomment here if you want to buy token
+      // const tx = await router.swapExactTokensForTokensSupportingFeeOnTransferTokens( //uncomment this if you want to buy deflationary token
+      const tx = await router.swapExactTokensForTokens( //uncomment here if you want to buy token
         amountIn,
         amountOutMin,
         [tokenIn, tokenOut],
@@ -145,8 +144,8 @@ const run = async () => {
           'gasPrice': data.gasPrice,
             'nonce' : null //set you want buy at where position in blocks
       });
-     
-      const receipt = await tx.wait(); 
+
+      const receipt = await tx.wait();
       console.log(`Transaction receipt : https://www.bscscan.com/tx/${receipt.logs[1].transactionHash}`);
       setTimeout(() => {process.exit()},2000);
     }catch(err){

@@ -5,6 +5,8 @@
 * [Setup](#HOW-TO-RUN)
 * [TroubleShoot](#TROUBLESHOOT)
 
+### NOW THE BOT IS POSSIBLE FOR KUCOIN AND MATIC NETWORK
+
 ## IMPORTANT NOTES BEFORE RUNNING THE BOT
 Just edit some part of the bot, you can see the origin at : https://github.com/MrFatoni/p
 
