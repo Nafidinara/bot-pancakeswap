@@ -11,7 +11,7 @@
 Just edit some part of the bot, you can see the origin at : https://github.com/MrFatoni/p
 
 ### Demo for sonic advanced bot :
-1. https://bit.ly/3vkSum0
+1. drive : https://bit.ly/3vkSum0
 2. SONIC DEGEN SCANNER : https://t.me/degenScanner
 3. youtube channel : https://bit.ly/3ABcHHW
 4. gitbook : https://sonic-advance-bot.gitbook.io/sonic/
@@ -19,10 +19,18 @@ Just edit some part of the bot, you can see the origin at : https://github.com/M
 <img src="./assets/advanced.png">
 
 ### What's the feature
-1. Buy early bsc gems with custom gas fee, slippage, amount.<br>
-2. Auto approve token after buy. <br>
-3. Sell buyed token with custom gas fee, slippage, amount. <br>
-4. Sell token with your custom increasing price, like 50%, 100%, 200%.
+1 ) Buy
+2 ) Sell
+3 ) Sell with target profit & custom amount
+4 ) Approval/Confirmation
+5 ) Snipe before liquidity added 
+6 ) Custom slippage, gwei , gas limit
+7 ) Some mini customizations
+8 ) Spam Buy
+9 ) Degen Scanner : https://t.me/degenScanner
+10 ) All trx using BNB instead WBNB
+11 ) support unicrypt and dxsale
+12 ) support matic network
 
 ### What's will you get
 To avoid scam, I will invite you to my private repository, and you will get whole of code, and any update if I push new update. Please only contact to Discord : <code>countdown#4008</code> or <code>nafidinara@gmail.com</code> with subject <b>PancakeSwap Bot Info</b> for more info. For error or problem questions please open issues in GitHub, don't email me. Maybe I'll slow response on weekend. Thanks!
