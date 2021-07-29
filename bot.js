@@ -154,7 +154,7 @@ const run = async () => {
         {
         reason : ${error.reason},
         transactionHash : ${error.transactionHash}
-        message : Please check your BNB/WBNB balance, maybe its due because insufficient balance or approve your token manually on pancakeSwap
+        message : ${error}
         }`);
         console.log(error);
 
