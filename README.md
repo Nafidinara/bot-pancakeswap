@@ -97,3 +97,15 @@ All this bot feature are free, I'm never sell this bot, and I'm never share my T
 - your gas price are to small
 - your GWEI are to small (use 15+ for early token)
 - your slippage are to small (use 30+ for early token)
+
+* Error with node :
+  
+ <img src="./assets/wss-error.png">
+  
+Hi all, for now <code>wss://bsc-ws-node.nariox.org:443</code> it won't be able to use again forever. for that you can use private node or build your own node. it more faster than public node.
+there is my recommend for private node : 
+  1. https://getblock.io/en/
+  2. https://www.quicknode.com/
+  3. https://www.ankr.com/ <br>
+   
+We also rent a full node with cheapest and also faster speed, you will get installation guide and maintenance for that just for $70/month, you can compare with private node that I recommend. The different full node with private node is, full node build in our own vps, so we can manage the speed and performance. for more info you can contact on discord : <code>countdown#4008</code>
