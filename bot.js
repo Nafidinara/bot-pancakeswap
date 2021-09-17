@@ -56,7 +56,8 @@ const router = new ethers.Contract(
   [
     'function getAmountsOut(uint amountIn, address[] memory path) public view returns (uint[] memory amounts)',
     'function swapExactTokensForTokens(uint amountIn, uint amountOutMin, address[] calldata path, address to, uint deadline) external returns (uint[] memory amounts)',
-    'function swapExactTokensForTokensSupportingFeeOnTransferTokens(uint amountIn, uint amountOutMin, address[] calldata path, address to, uint deadline) external returns (uint[] memory amounts)'
+    'function swapExactTokensForTokensSupportingFeeOnTransferTokens(uint amountIn, uint amountOutMin, address[] calldata path, address to, uint deadline) external returns (uint[] memory amounts)',
+    'function swapETHForExactTokens(uint amountOut, address[] calldata path, address to, uint deadline) external  payable returns (uint[] memory amounts)'
   ],
   account
 );
@@ -110,8 +111,8 @@ const run = async () => {
       const amountIn = ethers.utils.parseUnits(`${data.AMOUNT_OF_WBNB}`, 'ether');
       if ( parseInt(data.Slippage) !== 0 ){
         const amounts = await router.getAmountsOut(amountIn, [tokenIn, tokenOut]);
-        //Our execution price will be a bit different, we need some flexbility
-        const amountOutMin = amounts[1].sub(amounts[1].div(`${data.Slippage}`));
+        //Our execution price will be a bit different, we need some flexibility
+        amountOutMin = amounts[1].sub(amounts[1].div(`${data.Slippage}`))
       }
 
       console.log(
@@ -133,8 +134,7 @@ const run = async () => {
       console.log(chalk.yellow(`data.gasPrice: ${data.gasPrice}`));
 
       // const tx = await router.swapExactTokensForTokensSupportingFeeOnTransferTokens( //uncomment this if you want to buy deflationary token
-      const tx = await router.swapExactTokensForTokens( //uncomment here if you want to buy token
-        amountIn,
+      const tx = await router.swapETHForExactTokens( //uncomment here if you want to buy token
         amountOutMin,
         [tokenIn, tokenOut],
         data.recipient,
@@ -142,7 +142,8 @@ const run = async () => {
         {
           'gasLimit': data.gasLimit,
           'gasPrice': data.gasPrice,
-            'nonce' : null //set you want buy at where position in blocks
+          'nonce' : null, //set you want buy at where position in blocks
+          'value' : amountIn
       });
 
       const receipt = await tx.wait();

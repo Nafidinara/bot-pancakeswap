@@ -1,6 +1,7 @@
 
 # Table of contents
 * [Important Notes](#IMPORTANT-NOTES-BEFORE-RUNNING-THE-BOT)
+* [New Update](#NEW-UPDATES)
 * [Advanced Bot](#NOW-LAUNCH-ADVANCED-BOT)
 * [Setup](#HOW-TO-RUN)
 * [TroubleShoot](#TROUBLESHOOT)
@@ -10,27 +11,17 @@
 ## IMPORTANT NOTES BEFORE RUNNING THE BOT
 Just edit some part of the bot, you can see the origin at : https://github.com/MrFatoni/p
 
+## NEW UPDATES
+1. In this new update you can use BNB instead WBNB. it will make you easier to snipe :)
+
+## NOW LAUNCH ADVANCED BOT
+With more feature and benefit
 ### Demo for sonic advanced bot :
 1. drive : https://bit.ly/3vkSum0
 2. SONIC DEGEN SCANNER : https://t.me/degenScanner
-3. youtube channel : https://bit.ly/3ABcHHW
-4. gitbook : https://sonic-advance-bot.gitbook.io/sonic/
+3. website : http://sonicsniperbot.com/
 
 <img src="./assets/advanced.png">
-
-### What's the feature
-1 ) Buy
-2 ) Sell
-3 ) Sell with target profit & custom amount
-4 ) Approval/Confirmation
-5 ) Snipe before liquidity added 
-6 ) Custom slippage, gwei , gas limit
-7 ) Some mini customizations
-8 ) Spam Buy
-9 ) Degen Scanner : https://t.me/degenScanner
-10 ) All trx using BNB instead WBNB
-11 ) support unicrypt and dxsale
-12 ) support matic network
 
 ### What's will you get
 To avoid scam, I will invite you to my private repository, and you will get whole of code, and any update if I push new update. Please only contact to Discord : <code>countdown#4008</code> or <code>nafidinara@gmail.com</code> with subject <b>PancakeSwap Bot Info</b> for more info. For error or problem questions please open issues in GitHub, don't email me. Maybe I'll slow response on weekend. Thanks!
@@ -78,8 +69,6 @@ TO_PURCHASE=0xe9e7cea3dedca5984780bafc599bd69add087d56
 
 
 ```
-5. Approve your WBNB in pancake like this
-   <img src="./assets/img.png">
 
 6. run with <code>npm run snipe </code>.
 
