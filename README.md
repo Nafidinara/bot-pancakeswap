@@ -12,7 +12,8 @@
 Just edit some part of the bot, you can see the origin at : https://github.com/MrFatoni/p
 
 ## NEW UPDATES
-1. In this new update you can use BNB instead BNB. it will make you easier to snipe :)
+1. In this new update you can use BNB instead WBNB. it will make you easier to snipe :)
+2. Join free discord channel for more information : https://discord.gg/dtWDN5JWB5
 
 ## NOW LAUNCH ADVANCED BOT
 With more feature and benefit
