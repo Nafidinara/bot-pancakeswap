@@ -12,7 +12,7 @@
 Just edit some part of the bot, you can see the origin at : https://github.com/MrFatoni/p
 
 ## NEW UPDATES
-1. In this new update you can use BNB instead WBNB. it will make you easier to snipe :)
+1. In this new update you can use BNB instead BNB. it will make you easier to snipe :)
 
 ## NOW LAUNCH ADVANCED BOT
 With more feature and benefit
@@ -33,8 +33,8 @@ To avoid scam, I will invite you to my private repository, and you will get whol
 4. set up your <code>.env</code> to with this explanation : 
 
 ```
-WBNB_CONTRACT=0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c
-~ WBNB contract for buy the token
+BNB_CONTRACT=0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c
+~ BNB contract for buy the token
 
 FACTORY=0xcA143Ce32Fe78f1f7019d7d551a6402fC5350c73
 ~ Pancake Factory contract to get function of buy
@@ -61,8 +61,8 @@ MIN_LIQUIDITY_ADDED=3
 YOUR_MNEMONIC=
 ~ Input your private Key here, that you get from your wallet privacy.
 
-AMOUNT_OF_WBNB=0.002
-~ Amount how much you want buy the token in WBNB.
+AMOUNT_OF_BNB=0.002
+~ Amount how much you want buy the token in BNB.
 
 TO_PURCHASE=0xe9e7cea3dedca5984780bafc599bd69add087d56
 ~ Token address that you want to buy.
@@ -82,7 +82,7 @@ All this bot feature are free, I'm never sell this bot, and I'm never share my T
 
 ## TROUBLESHOOT
 * there are some reason if your tx failed :
-- you haven't approve your WBNB
+- you haven't approve your BNB
 - your gas price are to small
 - your GWEI are to small (use 15+ for early token)
 - your slippage are to small (use 30+ for early token)

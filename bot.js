@@ -8,11 +8,11 @@ const app = express();
 dotenv.config();
 
 const data = {
-  WBNB: process.env.WBNB_CONTRACT, //wbnb
+  BNB: process.env.BNB_CONTRACT, //bnb
 
   to_PURCHASE: process.env.TO_PURCHASE, // token that you will purchase = BUSD for test '0xe9e7cea3dedca5984780bafc599bd69add087d56'
 
-  AMOUNT_OF_WBNB : process.env.AMOUNT_OF_WBNB, // how much you want to buy in WBNB
+  AMOUNT_OF_BNB : process.env.AMOUNT_OF_BNB, // how much you want to buy in BNB
 
   factory: process.env.FACTORY,  //PancakeSwap V2 factory
 
@@ -34,7 +34,7 @@ let jmlBnb = 0;
 
 const wss = process.env.WSS_NODE;
 const mnemonic = process.env.YOUR_MNEMONIC //your memonic;
-const tokenIn = data.WBNB;
+const tokenIn = data.BNB;
 const tokenOut = data.to_PURCHASE;
 // const provider = new ethers.providers.JsonRpcProvider(bscMainnetUrl)
 const provider = new ethers.providers.WebSocketProvider(wss);
@@ -63,7 +63,7 @@ const router = new ethers.Contract(
 );
 
 const erc = new ethers.Contract(
-  data.WBNB,
+  data.BNB,
   [{"constant": true,"inputs": [{"name": "_owner","type": "address"}],"name": "balanceOf","outputs": [{"name": "balance","type": "uint256"}],"payable": false,"type": "function"}],
   account
 );
@@ -107,8 +107,8 @@ const run = async () => {
       initialLiquidityDetected = true;
 
       let amountOutMin = 0;
-      //We buy x amount of the new token for our wbnb
-      const amountIn = ethers.utils.parseUnits(`${data.AMOUNT_OF_WBNB}`, 'ether');
+      //We buy x amount of the new token for our bnb
+      const amountIn = ethers.utils.parseUnits(`${data.AMOUNT_OF_BNB}`, 'ether');
       if ( parseInt(data.Slippage) !== 0 ){
         const amounts = await router.getAmountsOut(amountIn, [tokenIn, tokenOut]);
         //Our execution price will be a bit different, we need some flexibility
