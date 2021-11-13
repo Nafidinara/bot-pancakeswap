@@ -86,7 +86,7 @@ const run = async () => {
     jmlBnb = await ethers.utils.formatEther(pairBNBvalue);
     console.log(`value BNB : ${jmlBnb}`);
 
-    if(jmlBnb > data.minBnb){
+    if(parseFloat(jmlBnb) > parseFloat(data.minBnb)){
         setTimeout(() => buyAction(), 3000);
     }
     else{
