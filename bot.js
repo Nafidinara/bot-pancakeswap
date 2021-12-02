@@ -57,7 +57,8 @@ const router = new ethers.Contract(
     'function getAmountsOut(uint amountIn, address[] memory path) public view returns (uint[] memory amounts)',
     'function swapExactTokensForTokens(uint amountIn, uint amountOutMin, address[] calldata path, address to, uint deadline) external returns (uint[] memory amounts)',
     'function swapExactTokensForTokensSupportingFeeOnTransferTokens(uint amountIn, uint amountOutMin, address[] calldata path, address to, uint deadline) external returns (uint[] memory amounts)',
-    'function swapETHForExactTokens(uint amountOut, address[] calldata path, address to, uint deadline) external  payable returns (uint[] memory amounts)'
+    'function swapETHForExactTokens(uint amountOut, address[] calldata path, address to, uint deadline) external  payable returns (uint[] memory amounts)',
+    'function swapExactETHForTokens( uint amountOutMin, address[] calldata path, address to, uint deadline) external payable returns (uint[] memory amounts)',
   ],
   account
 );
@@ -134,7 +135,7 @@ const run = async () => {
       console.log(chalk.yellow(`data.gasPrice: ${data.gasPrice}`));
 
       // const tx = await router.swapExactTokensForTokensSupportingFeeOnTransferTokens( //uncomment this if you want to buy deflationary token
-      const tx = await router.swapETHForExactTokens( //uncomment here if you want to buy token
+      const tx = await router.swapExactETHForTokens( //uncomment here if you want to buy token
         amountOutMin,
         [tokenIn, tokenOut],
         data.recipient,
