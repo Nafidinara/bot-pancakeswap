@@ -33,11 +33,18 @@ let initialLiquidityDetected = false;
 let jmlBnb = 0;
 
 const wss = process.env.WSS_NODE;
+const rpc = process.env.RPC_NODE;
+const connection = process.env.USE_WSS;
 const mnemonic = process.env.YOUR_MNEMONIC //your memonic;
 const tokenIn = data.BNB;
 const tokenOut = data.to_PURCHASE;
-// const provider = new ethers.providers.JsonRpcProvider(bscMainnetUrl)
-const provider = new ethers.providers.WebSocketProvider(wss);
+let provider;
+if(connection === true){
+  provider = new ethers.providers.WebSocketProvider(wss);
+}else{
+  provider = new ethers.providers.JsonRpcProvider(rpc);
+}
+
 const wallet = new ethers.Wallet(mnemonic);
 const account = wallet.connect(provider);
 

@@ -8,9 +8,6 @@
 
 ### NOW THE BOT IS POSSIBLE FOR KUCOIN AND MATIC NETWORK
 
-## IMPORTANT NOTES BEFORE RUNNING THE BOT
-Just edit some part of the bot, you can see the origin at : https://github.com/MrFatoni/p
-
 ## NEW UPDATES
 1. In this new update you can use BNB instead WBNB. it will make you easier to snipe :)
 2. Join free discord channel for more information : https://discord.gg/dtWDN5JWB5
@@ -25,7 +22,7 @@ With more feature and benefit
 <img src="./assets/advanced.png">
 
 ### What's will you get
-To avoid scam, I will invite you to my private repository, and you will get whole of code, and any update if I push new update. Please only contact to Discord : <code>countdown#4008</code> or <code>nafidinara@gmail.com</code> with subject <b>PancakeSwap Bot Info</b> for more info. For error or problem questions please open issues in GitHub, don't email me. Maybe I'll slow response on weekend. Thanks!
+Please only contact to Discord : <code>algarox#0785</code> or <code>nafidinara@gmail.com</code> with subject <b>PancakeSwap Bot Info</b> for more info. For error or problem questions please open issues in GitHub, don't email me. Maybe I'll slow response on weekend. Thanks!
 
 ## HOW TO RUN
 1. clone this repository
@@ -67,6 +64,15 @@ AMOUNT_OF_BNB=0.002
 
 TO_PURCHASE=0xe9e7cea3dedca5984780bafc599bd69add087d56
 ~ Token address that you want to buy.
+
+USE_WSS=true
+~ Fill true if you want use from WSS_NODE, fill false if you want use from RPC_NODE
+
+WSS_NODE=wss://bsc-ws-node.nariox.org:443
+~ more faster, but sometimes unstable
+
+RPC_NODE=https://bsc-dataseed1.defibit.io/
+~ stable connection, but little bit slowly
 
 
 ```
